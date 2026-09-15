@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SketchUp Bilingual Vocabulary Tool</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* Hide scrollbars for clean UI layout */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Smooth modal animations */
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        .modal-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 300ms, transform 300ms;
+        }
+        .modal-leave {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .modal-leave-active {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 300ms, transform 300ms;
+        }
+    </style>
+</head>
+<body class="bg-[#9CB692] h-screen w-screen flex flex-col font-sans relative overflow-hidden select-none">
+
+    <div class="bg-white h-12 flex items-center px-4 border-b border-gray-300 shadow-sm z-20 justify-between shrink-0">
+        <div class="flex items-center gap-4">
+            <i class="fas fa-bars text-gray-600 text-lg cursor-pointer hover:text-blue-600"></i>
+            <span class="font-semibold text-blue-900 cursor-pointer">Untitled</span>
+            <div class="flex gap-3 ml-2 border-l border-gray-300 pl-4">
+                <i class="far fa-play-circle text-blue-500 cursor-pointer hover:text-blue-700"></i>
+                <i class="fas fa-undo text-gray-400 cursor-pointer"></i>
+                <i class="fas fa-redo text-gray-400 cursor-pointer"></i>
+                <i class="fas fa-exclamation-triangle text-yellow-500 cursor-pointer"></i>
+                <span class="text-sm font-semibold text-gray-700 hover:text-black cursor-pointer">Save</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <i class="fas fa-cube text-blue-600 text-2xl"></i>
+            <div class="flex flex-col leading-tight">
+                <span class="font-bold text-blue-900 text-lg">SketchUp</span>
+                <span class="text-xs text-gray-600">for Schools</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-1 relative overflow-hidden">
+        
+        <!-- Center Canvas Area -->
+        <div class="flex-1 relative flex items-center justify-center">
+            <!-- Canvas remains clean and uncluttered -->
+        </div>
+
+        <!-- Left Toolbar (Includes all 16 SketchUp tools) -->
+        <div class="absolute left-2 top-4 flex flex-col gap-2 z-10 w-16 pb-8 h-[calc(100vh-4rem)] overflow-y-auto no-scrollbar">
+            
+            <!-- Search Tool -->
+            <div class="bg-white p-2 rounded shadow flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 border border-gray-200 h-16 shrink-0" onclick="showWordData('search')">
+                <img src="./images/search.png" class="w-10 h-10 object-contain" alt="Search" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+            </div>
+            
+            <!-- Tools Group -->
+            <div class="bg-white rounded shadow flex flex-col border border-gray-200 items-center py-2 gap-3">
+                <div class="cursor-pointer hover:bg-blue-100 p-2 rounded w-full flex justify-center border-l-4 border-blue-500 bg-blue-50" onclick="showWordData('select')">
+                    <img src="./images/select.png" class="w-10 h-10 object-contain" alt="Select" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('eraser')">
+                    <img src="./images/eraser.png" class="w-10 h-10 object-contain" alt="Eraser" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('line')">
+                    <img src="./images/line.png" class="w-10 h-10 object-contain" alt="Line" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('rectangle')">
+                    <img src="./images/rectangle.png" class="w-10 h-10 object-contain" alt="Rectangle" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('push')">
+                    <img src="./images/push.png" class="w-10 h-10 object-contain" alt="Push" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('pull')">
+                    <img src="./images/pull.png" class="w-10 h-10 object-contain" alt="Pull" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('move')">
+                    <img src="./images/move.png" class="w-10 h-10 object-contain" alt="Move" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('rotate')">
+                    <img src="./images/rotate.png" class="w-10 h-10 object-contain" alt="Rotate" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('scale')">
+                    <img src="./images/scale.png" class="w-10 h-10 object-contain" alt="Scale" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('paint')">
+                    <img src="./images/paint.png" class="w-10 h-10 object-contain" alt="Paint" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('orbit')">
+                    <img src="./images/orbit.png" class="w-10 h-10 object-contain" alt="Orbit" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('pan')">
+                    <img src="./images/pan.png" class="w-10 h-10 object-contain" alt="Pan" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('tapeMeasure')">
+                    <img src="./images/tapeMeasure.png" class="w-10 h-10 object-contain" alt="Tape Measure" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('zoomExtents')">
+                    <img src="./images/zoomExtents.png" class="w-10 h-10 object-contain" alt="Zoom In" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+                <div class="cursor-pointer hover:bg-gray-100 p-2 rounded w-full flex justify-center" onclick="showWordData('zoom')">
+                    <img src="./images/zoom.png" class="w-10 h-10 object-contain" alt="Zoom Out" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-gray-100 h-8 flex items-center justify-between px-4 border-t border-gray-300 z-20 shrink-0">
+        <div class="flex items-center gap-4 text-gray-600 text-sm">
+            <i class="far fa-question-circle cursor-pointer hover:text-black"></i>
+            <i class="fas fa-globe cursor-pointer hover:text-black"></i>
+            <i class="fas fa-mouse cursor-pointer hover:text-black"></i>
+            <span>Click or drag to select objects. Shift = Add/Subtract. Ctrl = Add. Shift + Ctrl = Subtract.</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="text-sm text-gray-600">Measurements</span>
+            <input type="text" class="border border-gray-400 rounded px-2 py-0.5 w-32 bg-white text-sm outline-none focus:border-blue-500" readonly>
+            <i class="fas fa-cube text-blue-600 ml-2"></i>
+        </div>
+    </div>
+
+    <div id="wordModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center backdrop-blur-sm">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg mx-4 transform transition-all overflow-hidden border border-gray-100">
+            
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-400 p-6 text-center relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 focus:outline-none">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                <div id="modalIcon" class="w-16 h-16 bg-white rounded-full mx-auto flex items-center justify-center mb-3 shadow-md border-2 border-blue-200 overflow-hidden p-2">
+                    <!-- Dynamic Tool Image -->
+                </div>
+                <h2 id="modalWord" class="text-3xl font-bold text-white capitalize tracking-wide">Word</h2>
+                <h3 id="modalTranslation" class="text-2xl font-bold text-yellow-300 mt-2 hidden animate-pulse">翻譯</h3>
+            </div>
+
+            <!-- Modal Body (Sample Sentence + Large GIF Preview) -->
+            <div class="p-6 space-y-4">
+                <!-- Sample Sentence Block -->
+                <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                    <h4 class="text-xs font-bold text-blue-800 uppercase mb-1 tracking-wider">Sample Sentence</h4>
+                    <p id="modalSentence" class="text-gray-700 italic text-base md:text-lg leading-relaxed">This is a sample sentence.</p>
+                </div>
+
+                <!-- GIF / Visual Display Area -->
+                <div class="h-60 bg-gray-100 rounded-lg flex items-center justify-center border border-dashed border-gray-300 overflow-hidden p-2">
+                    <img id="modalMedia" src="" alt="Visual example" class="max-h-full max-w-full object-contain rounded shadow-sm" onerror="this.src='https://placehold.co/600x300/e2e8f0/475569?text=Add+GIF+File+Here'" />
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="bg-gray-50 px-6 py-4 flex justify-between items-center border-t border-gray-200">
+                <button onclick="playSound()" class="text-blue-600 hover:text-blue-800 flex items-center gap-2 font-medium px-4 py-2 rounded hover:bg-blue-50 transition-colors">
+                    <i class="fas fa-volume-up text-lg"></i> Listen
+                </button>
+                <button onclick="toggleTranslation()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-md transition-colors transform hover:scale-105">
+                    <i class="fas fa-language mr-2"></i>Translate
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const vocabularyData = {
+            search: { word: "Search", translation: "搜尋", sentence: "I search for my lost pencil under the desk.", mediaUrl: "./images/search.gif" },
+            select: { word: "Select", translation: "選擇", sentence: "Select your favorite color from the box.", mediaUrl: "./images/select.gif" },
+            eraser: { word: "Eraser", translation: "橡皮擦", sentence: "Use an eraser to fix your drawing mistake.", mediaUrl: "./images/eraser.gif" },
+            line: { word: "Line", translation: "線", sentence: "Draw a straight line with a ruler.", mediaUrl: "./images/line.gif" },
+            rectangle: { word: "Rectangle", translation: "長方形", sentence: "A classroom door looks like a big rectangle.", mediaUrl: "./images/rectangle.gif" },
+            push: { word: "Push", translation: "推", sentence: "Push the door to go into the room.", mediaUrl: "./images/push.gif" },
+            pull: { word: "Pull", translation: "拉", sentence: "Pull the rope to bring the boat close.", mediaUrl: "./images/pull.gif" },
+            move: { word: "Move", translation: "移動", sentence: "Move your chair closer to the table.", mediaUrl: "./images/move.gif" },
+            rotate: { word: "Rotate", translation: "旋轉", sentence: "Rotate the wheel to make it spin.", mediaUrl: "./images/rotate.gif" },
+            scale: { word: "Scale", translation: "縮放", sentence: "Scale the box to make it bigger or smaller.", mediaUrl: "./images/scale.gif" },
+            paint: { word: "Paint", translation: "油漆 / 著色", sentence: "Paint the box bright red and blue.", mediaUrl: "./images/paint.gif" },
+            orbit: { word: "Orbit", translation: "環繞", sentence: "Walk around the box to see all sides.", mediaUrl: "./images/orbit.gif" },
+            pan: { word: "Pan", translation: "平移視角", sentence: "Slide your screen left or right to see a different part of your model.", mediaUrl: "./images/pan.gif" },
+            tapeMeasure: { word: "Tape Measure", translation: "捲尺", sentence: "Use a tape measure to check how tall you are.", mediaUrl: "./images/tapeMeasure.gif" },
+            zoomExtents: { word: "Zoom In", translation: "放大視角", sentence: "Zoom in to look at the small details closely.", mediaUrl: "./images/zoomExtents.gif" },
+            zoom: { word: "Zoom Out", translation: "縮小視角", sentence: "Zoom out to see your whole drawing on the screen.", mediaUrl: "./images/zoom.gif" }
+        };
+
+        let currentWordId = null;
+        const modal = document.getElementById('wordModal');
+        const translationEl = document.getElementById('modalTranslation');
+
+        function showWordData(toolId) {
+            currentWordId = toolId;
+            let data = vocabularyData[toolId];
+            
+            if (!data) return;
+
+            document.getElementById('modalWord').textContent = data.word;
+            document.getElementById('modalSentence').textContent = data.sentence;
+            document.getElementById('modalIcon').innerHTML = `<img src="./images/${toolId}.png" class="w-10 h-10 object-contain" alt="${data.word}" onerror="this.src='https://placehold.co/40x40/e2e8f0/475569?text=?'">`;
+            
+            const mediaImg = document.getElementById('modalMedia');
+            mediaImg.src = data.mediaUrl || `./images/${toolId}.gif`;
+            mediaImg.onerror = function() {
+                this.src = `https://placehold.co/600x300/e2e8f0/475569?text=Add+${encodeURIComponent(data.word)}+GIF+Here`;
+            };
+
+            translationEl.textContent = data.translation;
+            translationEl.classList.add('hidden');
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            requestAnimationFrame(() => {
+                modal.firstElementChild.classList.remove('modal-enter');
+                modal.firstElementChild.classList.add('modal-enter-active');
+            });
+        }
+
+        function closeModal() {
+            modal.firstElementChild.classList.remove('modal-enter-active');
+            modal.firstElementChild.classList.add('modal-leave-active');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                modal.firstElementChild.classList.remove('modal-leave-active');
+                modal.firstElementChild.classList.add('modal-enter');
+            }, 300);
+        }
+
+        function toggleTranslation() {
+            translationEl.classList.toggle('hidden');
+        }
+
+        function playSound() {
+            const word = document.getElementById('modalWord').textContent;
+            
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
